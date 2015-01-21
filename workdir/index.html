@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="stylesheet" href="styles/index.css" type="text/css">
+
+  <title>Exif Reader</title>
+</head>
+<body>
+
+    <main role="main">
+        <div class="left">
+            <input type="file">
+            <div>
+                <img class="preview" src="">
+            </div>
+        </div>
+
+        <div class="right">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td colspan="2">No images</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+  <script src="vendor/exif-parser-0.1.7.js"></script>
+  <script src="vendor/jquery.js"></script>
+
+  <script src="src/app.js"></script>
+</body>
+</html>
