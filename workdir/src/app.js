@@ -21,13 +21,13 @@
          var exif = parseExif(arrayBuffer);
          console.log('exif: ', exif);
 
-         renderTable(exif);
+         renderTable(exif.tags);
      });
 
      //set image preview
-     readFile(file, function(imgSrc) {
+     readFile(file, function(dataURI) {
         var imgElement = applicationElement.find('.preview');
-        imgElement.attr('src', imgSrc);
+        imgElement.attr('src', dataURI);
 
      }, true);
   });
@@ -52,7 +52,7 @@
 
   function parseExif(arrayBuffer) {
       var parser = ExifParser.create(arrayBuffer);
-      return parser.parse().tags;
+      return parser.parse();
   }
 
   function renderTable(exif) {
@@ -68,10 +68,9 @@
               }
               var data = exif[key];
 
-              $('<tr>').appendTo(tbodyElement);
-              $('<td>' + key + '</td>').appendTo(tbodyElement);
-              $('<td>' + data + '</td>').appendTo(tbodyElement);
-              $('</tr>').appendTo(tbodyElement);
+              $('<tr>').appendTo(tbodyElement)
+                .append('<td>' + key + '</td>')
+                .append('<td>' + data + '</td>');
           }
       }
 
