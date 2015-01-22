@@ -11,32 +11,51 @@
 
     <main role="main">
         <div class="left">
-            <input type="file">
-            <div>
-                <img class="preview" src="">
-            </div>
+            <form></form>
         </div>
 
         <div class="right">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Key</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td colspan="2">No images</td>
-                    </tr>
-                </tbody>
-            </table>
+            <table></table>
         </div>
     </main>
 
+    <script id="form-template" type="template">
+        <input type="file">
+        <div>
+            <img class="preview" src="<%= src %>">
+        </div>
+    </script>
+
+    <script id="table-template" type="template">
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (!exif) {%>
+                <tr>
+                    <td colspan="2">No image selected</td>
+                </tr>
+            <%} else if (!_.keys(exif).length) {%>
+                <tr>
+                    <td colspan="2">No exif data found</td>
+                </tr>
+            <% } else {%>
+                <% _.each(exif, function(val, key) { %>
+                    <tr>
+                        <td><%= key %></td>
+                        <td><%= val %></td>
+                    </tr>
+                <% }); %>
+            <% } %>
+        </tbody>
+    </script>
+
   <script src="vendor/exif-parser-0.1.7.js"></script>
   <script src="vendor/jquery.js"></script>
+  <script src="vendor/lodash.js"></script>
 
   <script src="src/app.js"></script>
 </body>

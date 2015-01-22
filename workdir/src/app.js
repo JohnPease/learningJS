@@ -6,8 +6,11 @@
   var inputElement = applicationElement.find('input[type=file]');
   console.log(inputElement);
 
+  var formTemplate = _.template($('#form-template').html());
+  var tableTemplate = _.template($('#table-template').html());
+
   //can also do: inputElement.on('change', function(event) {...})
-  inputElement.bind('change', function(event) {
+  applicationElement.on('change', 'input[type=file]', function(event) {
      console.log('event: ', event);
      var file = event.target.files[0];
 
@@ -19,15 +22,17 @@
      //set table contents
      readFile(file, function cont(arrayBuffer) {
          var exif = parseExif(arrayBuffer);
-         console.log('exif: ', exif);
+         //console.log('exif: ', exif);
 
-         renderTable(exif.tags);
+         renderTable({ exif : exif.tags });
      });
 
      //set image preview
      readFile(file, function(dataURI) {
-        var imgElement = applicationElement.find('.preview');
-        imgElement.attr('src', dataURI);
+        //var imgElement = applicationElement.find('.preview');
+        //imgElement.attr('src', dataURI);
+
+        renderForm({ 'src' : dataURI});
 
      }, true);
   });
@@ -55,27 +60,15 @@
       return parser.parse();
   }
 
-  function renderTable(exif) {
-      var tbodyElement = $('<tbody>');
-
-      if (Object.keys(exif).length === 0) {
-          $('<tr><td colspan=2>No exif data found</td></tr>').appendTo(tbodyElement);
-      } else {
-
-          for (var key in exif) {
-              if (!exif.hasOwnProperty(key)) {
-                  continue;
-              }
-              var data = exif[key];
-
-              $('<tr>').appendTo(tbodyElement)
-                .append('<td>' + key + '</td>')
-                .append('<td>' + data + '</td>');
-          }
-      }
-
-      $('</tbody>').appendTo(tbodyElement);
-      $('tbody').replaceWith(tbodyElement);
+  function renderTable(data) {
+    applicationElement.find('table').html(tableTemplate(data));
   }
+
+  function renderForm(data) {
+      applicationElement.find('form').html(formTemplate(data));
+  }
+
+  renderForm({ src : '' });
+  renderTable({ exif : null });
 
 })();
