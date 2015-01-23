@@ -1,0 +1,24 @@
+<thead>
+    <tr>
+        <th>Key</th>
+        <th>Value</th>
+    </tr>
+</thead>
+<tbody>
+    <% if (!exif) {%>
+    <tr>
+        <td colspan="2">No image selected</td>
+    </tr>
+    <%} else if (!_.keys(exif).length) {%>
+        <tr>
+            <td colspan="2">No exif data found</td>
+        </tr>
+    <% } else {%>
+        <% _.each(exif, function(val, key) { %>
+        <tr>
+            <td><%= key %></td>
+            <td><%= val %></td>
+        </tr>
+        <% }); %>
+    <% } %>
+</tbody>
