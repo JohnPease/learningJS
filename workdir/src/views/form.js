@@ -6,8 +6,8 @@ var FormController = require('../controllers/form');
 var FormView = View.extend({
     template: require('../templates/form.html'),
     constructor: function() {
-        //Called whenever we call new FormView()
-        var controller = new FormController();
+        //Called whenever we call new FormView
+        var controller = new FormController(this.model);
         controller.bindEvents(this.$el);
 
         var view = this;

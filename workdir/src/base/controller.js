@@ -6,13 +6,16 @@ function Controller(model) {
 
 Controller.prototype = {
     bindEvents: function($el) {
+		
+		var controller = this;
+
         _.each(this.events, function(func, eventSelector) {
-            var parts = eventSelector.split(" ");
+            var parts = eventSelector.split(' ');
             var event = parts[0];
             var selector = parts[1];
 
-            $el.on(event, selector, _.bind(func, this));
-        }, this);
+            $el.on(event, selector, _.bind(controller[func], controller));
+        });
     }
 };
 

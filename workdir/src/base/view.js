@@ -7,12 +7,10 @@ function View($el, model) {
 }
 
 View.prototype = {
-    $el: $('<div/>'),
+    $el: $(''),
 
     template: function() {
         console.error('no template found');
-
-        return this;
     },
 
     render: function(data) {

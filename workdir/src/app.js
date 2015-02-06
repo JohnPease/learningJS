@@ -11,5 +11,5 @@ var photoModel = new PhotoModel({ exif : null, src : '' });
 var formView = new FormView(applicationElement.find('form'), photoModel);
 var tableView = new TableView(applicationElement.find('table'), photoModel);
 
-formView.render({ src : null });
+formView.render({ src : '' });
 tableView.render({ exif : null });

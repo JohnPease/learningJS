@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-module.exports = function(BaseClass, properties) {
+module.exports = function(properties) {
     var BaseClass = this;
 
     function Surrogate() {
@@ -11,4 +11,4 @@ module.exports = function(BaseClass, properties) {
     Surrogate.prototype = _.create(BaseClass.prototype, properties);
 
     return Surrogate;
-}
+};
